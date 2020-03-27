@@ -1,6 +1,6 @@
 const seedrandom = require('seedrandom');
 
-class Random_Generator {
+class Random{
     //Gets a random integer (without seed)
     static randomIntNoSeed(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
@@ -97,4 +97,4 @@ class Random_Generator {
     }
 }
 
-module.exports = Random_Generator;
+module.exports = Random;

@@ -1,5 +1,5 @@
-const Random_Generator = require('../modules/Random_Generator');
-const Descriptive_Statistics = require('../modules/Descriptive_Statistics');
+const Random = require('../modules/Random_Generator');
+const Descriptive = require('../modules/Descriptive_Statistics');
 const percToZScore = new Map([
     [1, 0.01], [2, 0.02], [3, 0.04], [4, 0.05], [5, 0.06], [6, 0.08], [7, 0.09], [8, 0.1], [9, 0.11], [10, 0.13],
     [11, 0.14], [12, 0.15], [13, 0.16], [14, 0.18], [15, 0.19], [16, 0.2], [17, 0.21], [18, 0.23], [19, 0.24], [20, 0.25],
@@ -13,7 +13,7 @@ const percToZScore = new Map([
     [91, 1.7], [92, 1.75], [93, 1.81], [94, 1.88], [95, 1.96], [96, 2.05], [97, 2.17], [98, 2.33], [99, 2.57]
 ]);
 
-class PopulationSampling {
+class Sampling {
     static getZFromConfidence(confidence) {
         if ( (typeof confidence !== 'number') || (confidence < 1) || (confidence >= 100) ){
             throw "ERROR: bad input to function Sampling.getZFromConfidence()";
@@ -24,14 +24,14 @@ class PopulationSampling {
 
     static simpleRandSample(arrList, sampleSize, seed=100) {
         // pick a simple random sample from array, with replacement and optional seed
-        return Random_Generator.selectNItemsSeeded(seed, arrList, sampleSize);
+        return Random.selectNItemsSeeded(seed, arrList, sampleSize);
     }
 
     static systematicSample(arrList, sampleSize) {
         // perform 1-in-k sampling, beginning at random element in arrList
         let sample = [];
         let k = Math.floor(arrList.length / sampleSize);
-        let startIdx = Random_Generator.randomIntNoSeed(0, arrList.length);
+        let startIdx = Random.randomIntNoSeed(0, arrList.length);
         let i = startIdx;
         while (i < arrList.length) {
             if (sample.length < sampleSize) {
@@ -51,8 +51,8 @@ class PopulationSampling {
 
     static marginOfError(sampleArr, confidence=95) {
         // given array and confidence level as a percent, return moe
-        let z = PopulationSampling.getZFromConfidence(confidence); // 2-sided z-test of sample
-        return z * Descriptive_Statistics.stdDev(sampleArr) / (sampleArr.length ** 0.5);
+        let z = Sampling.getZFromConfidence(confidence); // 2-sided z-test of sample
+        return z * Descriptive.stdDev(sampleArr) / (sampleArr.length ** 0.5);
     }
 
     static confidenceInterval(sampleArr, confidence=95) {
@@ -61,8 +61,8 @@ class PopulationSampling {
             throw("ERROR: Empty array, cannot divide by 0");
         }
 
-        let mean = Descriptive_Statistics.mean(sampleArr);
-        let moe = PopulationSampling.marginOfError(sampleArr, confidence);
+        let mean = Descriptive.mean(sampleArr);
+        let moe = Sampling.marginOfError(sampleArr, confidence);
         return [mean - moe, mean + moe];
     }
 
@@ -70,7 +70,7 @@ class PopulationSampling {
         // return recommended sample size given desired confidence (%) and precision/error (%)
         // if p is not known or not provided, takes the maximal value of 0.5
         // if N is provided (because it's "small"), correction is made
-        let z = PopulationSampling.getZFromConfidence(confidence);
+        let z = Sampling.getZFromConfidence(confidence);
         let n = z**2 * p * (1-p) / (error/100)**2;
         if (N !== null) {
             n = n / (1 + (n - 1)/N);
@@ -79,13 +79,13 @@ class PopulationSampling {
     }
 
     static findSampleSizeNoStdDev(confidence, width, p=0.5) {
-        return PopulationSampling.cochranFormula(confidence, width/2, p);
+        return Sampling.cochranFormula(confidence, width/2, p);
     }
 
     static findSampleSizeWithStdDev(confidence, width, stdDev) {
-        let z = PopulationSampling.getZFromConfidence(confidence);
+        let z = Sampling.getZFromConfidence(confidence);
         return (z * stdDev / width) ** 2;
     }
 }
 
-module.exports = PopulationSampling;
+module.exports = Sampling;

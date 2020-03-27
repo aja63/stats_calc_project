@@ -1,4 +1,4 @@
-class Descriptive_Statistics {
+class Descriptive {
     static mean(array) {
         if (array.length == 0) {
             throw("ERROR: empty array.");
@@ -126,4 +126,4 @@ class Descriptive_Statistics {
     }
 }
 
-module.exports = Descriptive_Statistics;
+module.exports = Descriptive;
