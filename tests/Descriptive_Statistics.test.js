@@ -5,31 +5,31 @@ const verboseOutput = false;
 const seed = 10;
 
 test('mean', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 10);
-    expect(Descriptive.mean(arr)).toEqual(jstat.mean(arr));
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 10);
+    expect(Descriptive_Statistics.mean(arr)).toEqual(jstat.mean(arr));
 });
 
 test('median', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 100);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
     if (verboseOutput) {
-        console.log(Descriptive.median(arr));
+        console.log(Descriptive_Statistics.median(arr));
         console.log(jstat.median(arr));
     }
-    expect(Descriptive.median(arr)).toEqual(jstat.median(arr));
+    expect(Descriptive_Statistics.median(arr)).toEqual(jstat.median(arr));
 });
 
 test('mode', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 100);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
     if (verboseOutput) {
-        console.log(Descriptive.mode(arr));
+        console.log(Descriptive_Statistics.mode(arr));
         console.log(jstat.mode(arr));
     }
-    expect(Descriptive.mode(arr)).toEqual(jstat.mode(arr));
+    expect(Descriptive_Statistics.mode(arr)).toEqual(jstat.mode(arr));
 });
 
 test('variance', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 10);
-    let calc = Descriptive.variance(arr).toFixed(4);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 10);
+    let calc = Descriptive_Statistics.variance(arr).toFixed(4);
     let actual = jstat.variance(arr, true).toFixed(4);
     if (verboseOutput) {
         console.log(arr, "->", calc);
@@ -39,8 +39,8 @@ test('variance', () => {
 });
 
 test('variance', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 10);
-    let calc = Descriptive.stdDev(arr).toFixed(4);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 10);
+    let calc = Descriptive_Statistics.stdDev(arr).toFixed(4);
     let actual = jstat.stdev(arr, true).toFixed(4);
     if (verboseOutput) {
         console.log(arr, "->", calc);
@@ -51,8 +51,8 @@ test('variance', () => {
 
 test('quartiles', () => {
     for (let n = 8; n < 12; n++) {
-        let arr = Random.randomIntListSeeded(seed, -100, 100, n);
-        let calc = Descriptive.quartiles(arr);
+        let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, n);
+        let calc = Descriptive_Statistics.quartiles(arr);
         let actual = jstat.quartiles(arr);
         if (verboseOutput) {
             console.log(arr.sort((a, b) => (a - b)), "->", calc);
@@ -70,8 +70,8 @@ test('quartiles', () => {
 });
 
 test('skewness', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 100);
-    let calc = Descriptive.skewness(arr).toFixed(4);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
+    let calc = Descriptive_Statistics.skewness(arr).toFixed(4);
     let actual = jstat.skewness(arr).toFixed(4);
     if (verboseOutput) {
         console.log(calc, actual);
@@ -80,11 +80,11 @@ test('skewness', () => {
 });
 
 test('sample correlation', () => {
-    let xArr = Random.randomIntListSeeded(seed, -100, 100, 100);
-    let m = Random.randomIntSeed(seed, -10, 10);
-    let b = Random.randomIntSeed(seed, -10, 10);
+    let xArr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
+    let m = Random_Generator.randomIntSeed(seed, -10, 10);
+    let b = Random_Generator.randomIntSeed(seed, -10, 10);
     let yArr = xArr.map((x) => x*m + b);
-    let calc = Descriptive.sample_correlation(xArr, yArr);
+    let calc = Descriptive_Statistics.sample_correlation(xArr, yArr);
     let actual = jstat.corrcoeff(xArr, yArr);
     if (verboseOutput) {
         console.log(calc, actual);
@@ -101,11 +101,11 @@ test('sample correlation', () => {
 });
 
 test('z_score', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 100);
-    let mean = Descriptive.mean(arr);
-    let stdDev = Descriptive.stdDev(arr);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
+    let mean = Descriptive_Statistics.mean(arr);
+    let stdDev = Descriptive_Statistics.stdDev(arr);
     let x = arr[0];
-    let calc = Descriptive.z_score(x, mean, stdDev).toFixed(4);
+    let calc = Descriptive_Statistics.z_score(x, mean, stdDev).toFixed(4);
     let actual = jstat.zscore(x, mean, stdDev).toFixed(4);
     if (verboseOutput) {
         console.log(calc, actual);
@@ -114,8 +114,8 @@ test('z_score', () => {
 });
 
 test('meanDeviation', () => {
-    let arr = Random.randomIntListSeeded(seed, -100, 100, 100);
-    let calc = Descriptive.meanDeviation(arr).toFixed(4);
+    let arr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
+    let calc = Descriptive_Statistics.meanDeviation(arr).toFixed(4);
     let actual = jstat.meandev(arr).toFixed(4);
     if (verboseOutput) {
         console.log(calc, actual);
@@ -124,11 +124,11 @@ test('meanDeviation', () => {
 });
 
 test('population correlation', () => {
-    let xArr = Random.randomIntListSeeded(seed, -100, 100, 100);
-    let m = Random.randomIntSeed(seed, -10, 10);
-    let b = Random.randomIntSeed(seed, -10, 10);
+    let xArr = Random_Generator.randomIntListSeeded(seed, -100, 100, 100);
+    let m = Random_Generator.randomIntSeed(seed, -10, 10);
+    let b = Random_Generator.randomIntSeed(seed, -10, 10);
     let yArr = xArr.map((x) => x*m + b);
-    let calc = Descriptive.population_correlation(xArr, yArr).toFixed(4);
+    let calc = Descriptive_Statistics.population_correlation(xArr, yArr).toFixed(4);
     let actual = jstat.corrcoeff(xArr, yArr).toFixed(4);
     if (verboseOutput) {
         console.log(calc, actual);
