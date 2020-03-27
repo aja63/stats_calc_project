@@ -1,5 +1,5 @@
-# stats_calc_project
-<a href='https://coveralls.io/github/ae324/stats_calculator?branch=master'><img src='https://coveralls.io/repos/github/ae324/stats_calculator/badge.svg?branch=master' alt='Coverage Status' /></a>
+[![Coverage Status](https://coveralls.io/repos/github/ae324/stats_calc_project/badge.svg?branch=master)](https://coveralls.io/github/ae324/stats_calc_project?branch=master)
+[![Build Status](https://travis-ci.org/ae324/stats_calc_project.svg?branch=master)](https://travis-ci.org/ae324/stats_calc_project)
 
 For this project, you need to create a statistical calculator with tests that can perform the functions listed below. You also need to create a library to use when creating your tests that can generate random data and make random selections. The random data needs to use a seed to ensure that you generate the same random data each time you run your tests, so that your calculations will remain the same. 
 Random Generator function
