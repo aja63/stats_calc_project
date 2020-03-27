@@ -1,4 +1,4 @@
-const Random = require('../modules/Random');
+const Random_Generator = require('../modules/Random_Generator');
 const verboseOutput = false;
 
 test('Random integer between 10 and 100', () => {

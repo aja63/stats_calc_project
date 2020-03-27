@@ -1,5 +1,5 @@
-const Random = require('../modules/Random');
-const Descriptive = require('../modules/Descriptive');
+const Random_Generator = require('../modules/Random_Generator');
+const Descriptive_Statistics = require('../modules/Descriptive_Statistics');
 const jstat = require('jstat');
 const verboseOutput = false;
 const seed = 10;
@@ -135,4 +135,3 @@ test('population correlation', () => {
     }
     expect(calc).toEqual(actual);
 });
-© 2020 GitHub, Inc.
