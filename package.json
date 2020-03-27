@@ -20,7 +20,7 @@
     "simple-statistics": "^7.0.8"
   },
   "devDependencies": {
-    "coveralls": "^3.0.9",
+    "coveralls": "^3.0.11",
     "jest": "^25.2.3",
     "jstat": "^1.9.2",
     "minimist": ">=1.2.2",
