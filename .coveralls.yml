@@ -1,4 +1,4 @@
 service_name: travis-ci
-repo_token: yLOTFLDNQ0SbaXo8u3N9OykgxxqXV0TQP
+repo_token: qkBq2LgOjsmPq0fmEAhFMQNXuVXyFddSu
 COVERALLS_GIT_BRANCH: master
 
